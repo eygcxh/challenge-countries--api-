@@ -7,7 +7,7 @@ import * as api from '../config'
 
 const composeEnhancers = compose
 
-const store = createStore(rootReducer, composeEnhancers(
+export const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(
     thunk.withExtraArgument({
       client: axios,
@@ -15,5 +15,3 @@ const store = createStore(rootReducer, composeEnhancers(
     })
   )
 ))
-
-export { store }
