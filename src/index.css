@@ -40,3 +40,10 @@ body {
   font-weight: var(--fw-light);
   background-color: var(--colors-bg);
 }
+
+title {
+  color: var(--colors-text);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+  font-weight: var(--fw-bold);
+}

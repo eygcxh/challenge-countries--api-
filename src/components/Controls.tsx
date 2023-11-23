@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { Search } from './Search';
-import { CustomSelect } from './CustomSelect';
+import { Search } from './Search'
+import { CustomSelect } from './CustomSelect'
 
 const optionsMap = {
   'Africa': { value: 'Africa', label: 'Africa' },
@@ -10,7 +10,7 @@ const optionsMap = {
   'Europe': { value: 'Europe', label: 'Europe' },
   'Oceania': { value: 'Oceania', label: 'Oceania' },
 }
-const options = Object.values(optionsMap);
+const options = Object.values(optionsMap)
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ const Wrapper = styled.div`
     justify-content: space-between;
     align-items: center;
   }
-`;
+`
 
 export const Controls = () => {
   return (
@@ -37,5 +37,5 @@ export const Controls = () => {
         onChange={() => {}}
       />
     </Wrapper>
-  );
-};
+  )
+}

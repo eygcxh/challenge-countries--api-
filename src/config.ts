@@ -23,11 +23,7 @@ const BASE_URL = 'https://restcountries.com/v2/'
 //   data: Country[];
 // }
 
-
 export const ALL_COUNTRIES = BASE_URL + 'all?fields=name,capital,flags,population,region'
-fetch(ALL_COUNTRIES)
-.then(res => res.json())
-.then(data => console.log(data))
 
 export const searchByCountry = (name: string): string => BASE_URL + 'name/' + name
 

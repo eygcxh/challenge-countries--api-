@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Wrapper = styled.section`
   width: 100%;
@@ -19,8 +19,8 @@ const Wrapper = styled.section`
     grid-template-columns: repeat(4, 1fr);
     gap: 4rem;
   }
-`;
+`
 
 export const List = ({ children }) => {
-  return <Wrapper>{children}</Wrapper>;
-};
+  return <Wrapper>{children}</Wrapper>
+}
