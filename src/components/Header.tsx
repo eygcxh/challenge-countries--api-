@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { Container } from './Container'
 import { setTheme } from '../store/theme/theme-action'
+import { clearControls } from '../store/controls/controls-actions'
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -37,6 +38,8 @@ export const Header: React.FC = () => {
 
   const toggleTheme = () => dispatch(setTheme(theme === 'light' ? 'dark' : 'light'))
 
+  const cleanUp = () => dispatch(clearControls())
+
   useEffect(() => {
     document.body.setAttribute('data-theme', theme)
   }, [theme])
@@ -45,7 +48,7 @@ export const Header: React.FC = () => {
     <HeaderEl>
       <Container>
         <Wrapper>
-          <h2 className='title'>Where is the world?</h2>
+          <h2 className='title' onClick={cleanUp}>Where is the world?</h2>
           <ModeSwitcher onClick={toggleTheme}>
             {theme === 'light' ? 
               <IoMdSunny size="14px" />

@@ -1,5 +1,30 @@
 import styled from 'styled-components'
 
+type Currency = {
+  code: string;
+  name: string;
+  symbol: string;
+}
+
+type Language = {
+  name: string;
+}
+
+type Props = {
+  name: string;
+  nativeName: string;
+  flag: string;
+  capital: string;
+  population: number;
+  region: string;
+  subregion: string;
+  topLevelDomain: string[];
+  currencies: Currency[];
+  languages: Language[];
+  borders: string[];
+  push: (path: string) => void;
+}
+
 const Wrapper = styled.section`
   margin-top: 3rem;
   width: 100%;
@@ -86,22 +111,20 @@ const Tag = styled.span`
   cursor: pointer;
 `
 
-export const Info = (props) => {
-  const {
-    name,
-    nativeName,
-    flag,
-    capital,
-    population,
-    region,
-    subregion,
-    topLevelDomain,
-    currencies = [],
-    languages = [],
-    borders = [],
-    push,
-  } = props
-
+export const Info = ({
+  name,
+  nativeName,
+  flag,
+  capital,
+  population,
+  region,
+  subregion,
+  topLevelDomain,
+  currencies = [],
+  languages = [],
+  borders = [],
+  push,
+}: Props) => {
   return (
     <Wrapper>
       <InfoImage src={flag} alt={name} />
@@ -153,7 +176,7 @@ export const Info = (props) => {
             <span>There is no border countries</span>
           ) : (
             <TagGroup>
-              {[].map((b) => (
+              {borders.map((b) => (
                 <Tag key={b} onClick={() => push(`/country/${b}`)}>
                   {b}
                 </Tag>

@@ -7,13 +7,19 @@ import { selectRegion } from '../store/controls/controls-selector'
 import { setRegion } from '../store/controls/controls-actions'
 import { ChangeEvent } from 'react'
 
-const optionsMap:  { [key: string]: { value: string; label: string } } = {
+type Option = {
+  value: string;
+  label: string;
+}
+
+const optionsMap: { [key: string]: Option } = {
   'Africa': { value: 'Africa', label: 'Africa' },
   'America': { value: 'America', label: 'America' },
   'Asia': { value: 'Asia', label: 'Asia' },
   'Europe': { value: 'Europe', label: 'Europe' },
   'Oceania': { value: 'Oceania', label: 'Oceania' },
 }
+
 const options = Object.values(optionsMap)
 
 const Wrapper = styled.div`
@@ -32,7 +38,7 @@ export const Controls = () => {
   const dispatch = useDispatch()
   const region = useSelector(selectRegion)
 
-  const handleSelect = (reg: {value: string; label: string}): ChangeEvent => {
+  const handleSelect = (reg: Option | null): void => {
     dispatch(setRegion(reg?.value || ''))
   }
 
