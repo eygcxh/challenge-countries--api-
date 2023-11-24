@@ -7,7 +7,7 @@ import { Card } from '../components/Card'
 import { Controls } from '../components/Controls'
 import { selectCountries, selectVisibleCountries } from '../store/countries/countries-selector'
 import { loadCountries } from '../store/countries/countries-actions'
-import { selectSearch } from '../store/controls/controls-selector'
+import { selectControls } from '../store/controls/controls-selector'
 
 
 type Flags = {
@@ -36,8 +36,8 @@ export const HomePage = () => {
   const navigate = useNavigate()
 
   const dispatch = useDispatch()
-  const search = useSelector(selectSearch)
-  const countries = useSelector(state => selectVisibleCountries(state, { search } ))
+  const { search, region } = useSelector(selectControls)
+  const countries = useSelector(state => selectVisibleCountries(state, { search, region } ))
   const { status, error, qty } = useSelector(selectCountries)
 
   
