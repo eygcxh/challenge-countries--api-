@@ -48,7 +48,7 @@ export const loadCountries = () => (dispatch: Dispatch, _: any, { client, api }:
   client.get(api.ALL_COUNTRIES)
     .then(({ data }) => dispatch(setCountries(data)))
     .catch((err) => dispatch(setError(err)))
-}
+} 
 
 
 

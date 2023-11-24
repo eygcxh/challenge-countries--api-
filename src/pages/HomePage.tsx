@@ -1,21 +1,21 @@
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 import { List } from '../components/List'
 import { Card } from '../components/Card'
 import { Controls } from '../components/Controls'
+import { selectAllCountries, selectCountries } from '../store/countries/countries-selector'
+import { loadCountries } from '../store/countries/countries-actions'
 
-interface Country {
-  flags: {
-    png: string;
-  };
-  name: string;
-  population: number;
-  region: string;
-  capital: string;
+
+type Flags = {
+  svg?: string | undefined;
+  png?: string | undefined;
 }
 
 interface CountryInfo {
-  img: string;
+  img: Flags;
   name: string;
   info: {
     title: string;
@@ -23,45 +23,69 @@ interface CountryInfo {
   }[];
 }
 
+interface Country {
+  flags: Flags;
+  name: string;
+  population: number;
+  region: string;
+  capital: string;
+}
+
 export const HomePage = () => {
   const navigate = useNavigate()
 
-  const countries: Country[] = []
+  const dispatch = useDispatch()
+  const countries = useSelector(selectAllCountries)
+  const { status, error, qty } = useSelector(selectCountries)
+  console.log(countries)
+
+  useEffect(() => {
+    if (!qty) {
+    dispatch(loadCountries())
+    }
+  }, [qty, dispatch])
+
 
   return (
     <>
       <Controls />
 
-      <List>
-        {countries.map((c) => {
-          const countryInfo: CountryInfo = {
-            img: c.flags.png,
-            name: c.name,
-            info: [
-              {
-                title: 'Population',
-                description: c.population.toLocaleString(),
-              },
-              {
-                title: 'Region',
-                description: c.region,
-              },
-              {
-                title: 'Capital',
-                description: c.capital,
-              },
-            ],
-          };
+      {error && <h2>Cant't fetch data</h2>}
+      {status === 'loading'&& <h2>Loading...</h2>}
 
-          return (
-            <Card
-              key={c.name}
-              onClick={() => navigate(`/country/${c.name}`)}
-              {...countryInfo}
-            />
-          )
-        })}
-      </List>
+      {status === 'received' && (
+              <List>
+              {countries.map((c: Country) => {
+                const countryInfo: CountryInfo = {
+                  img: c.flags.png,
+                  name: c.name,
+                  info: [
+                    {
+                      title: 'Population',
+                      description: c.population.toLocaleString(),
+                    },
+                    {
+                      title: 'Region',
+                      description: c.region,
+                    },
+                    {
+                      title: 'Capital',
+                      description: c.capital,
+                    },
+                  ],
+                }
+      
+                return (
+                  <Card
+                    key={c.name}
+                    onClick={() => navigate(`/country/${c.name}`)}
+                    {...countryInfo}
+                  />
+                )
+              })}
+            </List>
+      )}
     </>
+
   )
 }
