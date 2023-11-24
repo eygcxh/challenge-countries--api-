@@ -2,11 +2,12 @@ import { AnyAction } from 'redux'
 import { SET_COUNTRIES, SET_ERROR, SET_LOADING, Country } from './countries-actions'
 
 
-export type State = {
-    status: 'idle' | 'loading' | 'rejected' | 'received';
+export interface State {
+    list: Country[];
+    status: string;
     error: string | null;
-    list: Country[]
   }
+  
 
 const initialState: State = {
     status: 'idle',

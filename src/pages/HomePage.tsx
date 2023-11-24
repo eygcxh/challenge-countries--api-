@@ -5,8 +5,9 @@ import { useEffect } from 'react'
 import { List } from '../components/List'
 import { Card } from '../components/Card'
 import { Controls } from '../components/Controls'
-import { selectAllCountries, selectCountries } from '../store/countries/countries-selector'
+import { selectCountries, selectVisibleCountries } from '../store/countries/countries-selector'
 import { loadCountries } from '../store/countries/countries-actions'
+import { selectSearch } from '../store/controls/controls-selector'
 
 
 type Flags = {
@@ -23,7 +24,7 @@ interface CountryInfo {
   }[];
 }
 
-interface Country {
+export interface Country {
   flags: Flags;
   name: string;
   population: number;
@@ -35,10 +36,11 @@ export const HomePage = () => {
   const navigate = useNavigate()
 
   const dispatch = useDispatch()
-  const countries = useSelector(selectAllCountries)
+  const search = useSelector(selectSearch)
+  const countries = useSelector(state => selectVisibleCountries(state, { search } ))
   const { status, error, qty } = useSelector(selectCountries)
-  console.log(countries)
 
+  
   useEffect(() => {
     if (!qty) {
     dispatch(loadCountries())
