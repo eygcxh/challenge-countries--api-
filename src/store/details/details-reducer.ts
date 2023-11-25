@@ -32,7 +32,7 @@ export const detailsReducer = (state = initialState, { type, payload }: AnyActio
             return {
                 ...state,
                 status: 'received',
-                list: payload
+                currentCountry: payload
             }
         default:
             return state

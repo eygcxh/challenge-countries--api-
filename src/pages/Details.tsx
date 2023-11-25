@@ -8,10 +8,6 @@ import { selectDetails } from '../store/details/details-selector'
 import { useEffect } from 'react'
 import { loadCountriesByName } from '../store/details/details-action'
 
-type Country = {
-  name: string | null;
-}
-
 type Params = {
   name: string | undefined;
 }
@@ -36,7 +32,6 @@ export const Details = () => {
       {error && <h2>{error}</h2>}
       {currentCountry && 
       <Info push={navigate} {...currentCountry} />}
-      <Info />
     </div>
   )
 }

@@ -41,10 +41,11 @@ body {
   background-color: var(--colors-bg);
 }
 
-title {
+.title {
   color: var(--colors-text);
-  font-size: var(--fs-sm);
+  font-size: 2rem;
   text-decoration: none;
   font-weight: var(--fw-bold);
   cursor: pointer;
+  user-select: none;
 }

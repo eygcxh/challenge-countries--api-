@@ -1,4 +1,4 @@
-import { Dispatch } from 'redux'
+import { AnyAction, Dispatch } from 'redux'
 
 export const SET_LOADING = '@@details/SET_LOADING'
 export const SET_ERROR = '@@details/SET_ERROR'
@@ -42,7 +42,7 @@ const setCountry = (country: Country) => ({
     payload: country,
 }) 
 
-export const loadCountriesByName = (name: string) => (dispatch: Dispatch, _: any, { client, api }: { client: Client, api: Api }) => {
+export const loadCountriesByName = (name: string) => (dispatch: Dispatch<AnyAction>, _: any, { client, api }: { client: Client, api: Api }) => {
     dispatch(setLoading())
   
     client.get(api.searchByCountry(name))
