@@ -1,4 +1,8 @@
 import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux';
+import { selectNeighbors } from '../store/details/details-selector';
+import { useEffect } from 'react';
+import { loadNeighborsByBorder } from '../store/details/details-action';
 
 type Currency = {
   code: string;
@@ -125,6 +129,16 @@ export const Info = ({
   borders = [],
   push,
 }: Props) => {
+
+  const dispatch = useDispatch()
+  const neighbors = useSelector(selectNeighbors)
+
+  useEffect(() => {
+    if (borders.length) {
+      dispatch(loadNeighborsByBorder(borders))
+    }
+  }, [borders, dispatch])
+
   return (
     <Wrapper>
       <InfoImage src={flag} alt={name} />
@@ -176,7 +190,7 @@ export const Info = ({
             <span>There is no border countries</span>
           ) : (
             <TagGroup>
-              {borders.map((b) => (
+              {neighbors.map((b: string) => (
                 <Tag key={b} onClick={() => push(`/country/${b}`)}>
                   {b}
                 </Tag>

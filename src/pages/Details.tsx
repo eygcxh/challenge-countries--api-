@@ -6,7 +6,7 @@ import { Info } from '../components/Info'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectDetails } from '../store/details/details-selector'
 import { useEffect } from 'react'
-import { loadCountriesByName } from '../store/details/details-action'
+import { clearDetails, loadCountriesByName } from '../store/details/details-action'
 
 type Params = {
   name: string | undefined;
@@ -21,6 +21,10 @@ export const Details = () => {
 
   useEffect(() => {
     dispatch(loadCountriesByName(name))
+
+    return () => {
+      dispatch(clearDetails())
+    }
   }, [name, dispatch])
 
   return (
